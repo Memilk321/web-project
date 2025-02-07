@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียนผู้ป่วยฉุกเฉิน</title>
+    <link rel="stylesheet" href="/css/style2.css">
+</head>
+<body class="come2">
+    <header>
+        <div class="come1">
+            <ul>
+                <li><a href="#">ลงทะเบียนผู้ป่วยฉุกเฉิน</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="come2">
+        <form action="#" method="POST">
+            <h4 class="MENU">ข้อมูลทั่วไปผู้ป่วย</h4>
+            <label for="date">วัน/เดือน/ปี:</label>
+            <input type="date" id="date" name="date" required>
+            <br>
+            <label>คำนำหน้า:</label>
+            <input type="radio" name="prefix" value="นาย"> นาย
+            <input type="radio" name="prefix" value="เด็กชาย"> เด็กชาย
+            <input type="radio" name="prefix" value="นาง"> นาง
+            <input type="radio" name="prefix" value="นางสาว"> นางสาว
+            <input type="radio" name="prefix" value="เด็กหญิง"> เด็กหญิง
+            <br>
+            <label for="fname">ชื่อ:</label>
+            <input type="text" id="fname" name="fname" required>
+            <label for="lname">นามสกุล:</label>
+            <input type="text" id="lname" name="lname" required>
+            <br>
+            <label for="gender">เพศ:</label>
+            <input type="text" id="gender" name="gender">
+            <label for="age">อายุ:</label>
+            <input type="number" id="age" name="age" min="0">
+            <br>
+            <label for="record_id">เลขที่เวชระเบียน:</label>
+            <input type="text" id="record_id" name="record_id">
+            <label for="id_card">หมายเลขบัตรประชาชน:</label>
+            <input type="text" id="id_card" name="id_card">
+            <br>
+            <label for="nationality">สัญชาติ:</label>
+            <input type="text" id="nationality" name="nationality">
+            <label for="insurance_id">เลขที่สิทธิ์การรักษา:</label>
+            <input type="text" id="insurance_id" name="insurance_id">
+            <label for="health_insurance">เลขที่ประกันสุขภาพ:</label>
+            <input type="text" id="health_insurance" name="health_insurance">
+            <br>
+            <label for="address">ที่อยู่:</label>
+            <input type="text" id="address" name="address">
+            <label for="phone">หมายเลขติดต่อ:</label>
+            <input type="tel" id="phone" name="phone">
+            <br>
+            <h4 class="MENU">การซักประวัติผู้ป่วย</h4>
+            <label for="symptoms">อาการและอาการที่แสดง:</label>
+            <textarea id="symptoms" name="symptoms" rows="5"></textarea>
+            <br>
+            <label for="allergy">ประวัติแพ้ยา อาหาร หรือสารเคมีต่างๆ:</label>
+            <textarea id="allergy" name="allergy" rows="5"></textarea>
+            <br>
+            <label for="medication">ยาที่ผู้ป่วยใช้อยู่เป็นประจำ:</label>
+            <textarea id="medication" name="medication" rows="5"></textarea>
+            <br>
+            <label for="disease_history">ประวัติโรคประจำตัว การเจ็บป่วยในอดีต:</label>
+            <textarea id="disease_history" name="disease_history" rows="5"></textarea>
+            <br>
+            <label for="last_meal">สิ่งที่รับประทานล่าสุด:</label>
+            <textarea id="last_meal" name="last_meal" rows="5"></textarea>
+            <br>
+            <label for="emergency_event">เหตุการณ์ที่นำมาสู่ภาวะฉุกเฉิน:</label>
+            <textarea id="emergency_event" name="emergency_event" rows="5"></textarea>
+            <br>
+            <label>การประเมินภาวะฉุกเฉินเร่งด่วน:</label>
+            <input type="radio" name="emergency_level" value="วิกฤต"> ผู้ป่วยฉุกเฉินวิกฤต
+            <input type="radio" name="emergency_level" value="หนัก"> ผู้ป่วยฉุกเฉินหนัก
+            <input type="radio" name="emergency_level" value="เร่งด่วน"> ผู้ป่วยฉุกเฉินเร่งด่วน
+            <input type="radio" name="emergency_level" value="ไม่รุนแรง"> ผู้ป่วยฉุกเฉินไม่รุนแรง
+            <input type="radio" name="emergency_level" value="ทั่วไป"> ผู้ป่วยทั่วไป
+            <br>
+            <h4 class="MENU">ข้อมูลผู้ซักประวัติ</h4>
+            <label>คำนำหน้า:</label>
+            <input type="radio" name="interviewer_prefix" value="นาย">นาย
+            <input type="radio" name="interviewer_prefix" value="นาง">นาง
+            <input type="radio" name="interviewer_prefix" value="นางสาว">นางสาว<br>
+            <label for="interviewer_fname">ชื่อ:</label>
+            <input type="text" id="interviewer_fname" name="interviewer_fname">
+            <label for="interviewer_lname">นามสกุล:</label>
+            <input type="text" id="interviewer_lname" name="interviewer_lname">
+            <br>
+            <button type="button" onclick="addPatient()">บันทึก</button>
+            <button type="button"> <a href="http://localhost:10000/main">กลับไปหน้าหลัก</a></button>
+        </form>
+    </div>
+    <script>
+        async function addPatient() {
+            const patientData = {
+                date: document.getElementById('date').value,
+                prefix: document.querySelector('input[name="prefix"]:checked')?.value || '',
+                fname: document.getElementById('fname').value,
+                lname: document.getElementById('lname').value,
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value,
+                record_id: document.getElementById('record_id').value,
+                id_card: document.getElementById('id_card').value,
+                nationality: document.getElementById('nationality').value,
+                insurance_id: document.getElementById('insurance_id').value,
+                health_insurance: document.getElementById('health_insurance').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+                symptoms: document.getElementById('symptoms').value,
+                allergy: document.getElementById('allergy').value,
+                medication: document.getElementById('medication').value,
+                disease_history: document.getElementById('disease_history').value,
+                last_meal: document.getElementById('last_meal').value,
+                emergency_event: document.getElementById('emergency_event').value,
+                emergency_level: document.querySelector('input[name="emergency_level"]:checked')?.value || '',
+                interviewer_prefix: document.querySelector('input[name="interviewer_prefix"]:checked')?.value || '',
+                interviewer_fname: document.getElementById('interviewer_fname').value,
+                interviewer_lname: document.getElementById('interviewer_lname').value
+            };
+         try {
+            const res = await fetch('http://localhost:10000/pegoin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(patientData)
+            });
+    
+            const result = await res.json();
+            if (result.success) {
+                alert('บันทึกข้อมูลสำเร็จ!');
+                window.location.reload(); 
+            } else {
+                alert('❌ เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                console.error(result.error);
+            }  
+             } catch (error) {
+            alert('❌ เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์');
+            console.error('Error:', error);
+        }
+    }
+    </script>
+    
+</body>
+</html>

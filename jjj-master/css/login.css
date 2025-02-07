@@ -1,0 +1,168 @@
+/* รีเซ็ตค่า margin, padding และกำหนดให้ทุก element ใช้ box-sizing เป็น border-box */
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* ใช้ฟอนต์ Poppins */
+}
+
+/* สไตล์ของ body (พื้นหลังหลักของหน้าเว็บ) */
+body{
+    min-height: 100vh; /* ให้ความสูงขั้นต่ำเป็น 100% ของ viewport */
+    display:  flex; /* ใช้ flexbox */
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    justify-content: center; /* จัดให้อยู่กึ่งกลางแนวนอน */
+    background: linear-gradient(135deg, #039, #2777c8); /* พื้นหลังไล่สีจากน้ำเงินเข้มไปฟ้า */
+    background-size: cover; /* ปรับขนาดให้ครอบคลุมทั้งจอ */
+    background-position: center; /* จัดให้อยู่ตรงกลาง */
+    background-repeat: no-repeat; /* ไม่ให้ภาพซ้ำ */
+}
+
+/* สไตล์ของชื่อหัวข้อ LOGIN */
+.login-title{
+    text-align: center; /* จัดให้อยู่กึ่งกลาง */
+    font-size: 40px; /* ขนาดตัวอักษร */
+    margin-bottom: 40px; /* เว้นระยะห่างด้านล่าง */
+    color: white; /* สีของตัวอักษร */
+}
+
+/* กล่อง input (ช่องกรอกข้อมูล) */
+.input-box {
+    margin: 20px 0; /* เว้นระยะห่างด้านบนและล่าง */
+    position: relative; /* ใช้สำหรับวางไอคอนภายใน */
+}
+
+/* สไตล์ของ input */
+.input-box input {
+    width: 100%; /* กำหนดให้กว้างเต็มพื้นที่ */
+    padding: 12px 45px; /* ระยะห่างด้านใน */
+    background: rgba(255, 255, 255, 0.2); /* พื้นหลังโปร่งแสง */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* ขอบสีขาวโปร่ง */
+    border-radius: 10px; /* มุมโค้ง */
+    color: white; /* สีตัวอักษร */
+    font-size: 16px; /* ขนาดตัวอักษร */
+}
+
+/* สไตล์ของ placeholder (ตัวอย่างข้อความใน input) */
+.input-box input::placeholder{
+    color: rgba(255, 255, 255, 0.8); /* สีของ placeholder */
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* เมื่อ input ถูกคลิกหรือโฟกัส */
+.input-box input:focus{
+    outline: 3px solid rgba(255, 255, 255, 0.3); /* เส้นขอบเมื่อโฟกัส */
+}
+
+/* ซ่อนไอคอน reveal password ใน Microsoft Edge */
+.input-box input::-ms-reveal{
+    filter: invert(100%);
+}
+
+/* สไตล์ไอคอนในช่อง input */
+.input-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translate(-50%);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* กล่องจำการเข้าสู่ระบบ และ ลืมรหัสผ่าน */
+.remember-forgot-box{
+    display: flex;
+    justify-content: space-between; /* แยก 2 ด้าน */
+    margin: 20px 0; /* เว้นระยะห่าง */
+    font-size: 15px; /* ขนาดตัวอักษร */
+}
+
+/* สไตล์ของ label */
+.remember-forgot-box label{
+    display: flex;
+    gap: 8px; /* เว้นระยะระหว่าง checkbox กับข้อความ */
+    cursor: pointer; /* ทำให้เป็นรูปมือเมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของลิงก์ 'ลืมรหัสผ่าน' */
+.remember-forgot-box a{
+    color: white;
+    text-decoration: none;
+}
+
+.remember-forgot-box a:hover{
+    text-decoration: underline; /* ขีดเส้นใต้เมื่อโฮเวอร์ */
+}
+
+/* ปุ่มเข้าสู่ระบบ */
+.login-bin {
+    width: 100%;
+    padding: 12px 0;
+    background: #039; /* สีพื้นหลัง */
+    border: none;
+    border-radius: 50px; /* ทำให้เป็นปุ่มโค้งมน */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+    transition: all 0.3s ease; /* ทำให้เปลี่ยนสีและขนาดนุ่มนวล */
+    margin-bottom: 10px;
+}
+
+/* เมื่อโฮเวอร์ที่ปุ่ม Login */
+.login-btn:hover{
+    background: linear-gradient(90deg, #feb47b, #ff7e5f); /* ไล่สีส้มแดง */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* เงาเข้มขึ้น */
+    transform: scale(1.05); /* ขยายขนาดเล็กน้อย */
+}
+
+/* เมื่อกดปุ่ม Login */
+.login-btn:active {
+    transform: scale(0.98); /* ย่อขนาดลงเล็กน้อย */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* เงาน้อยลง */
+}
+
+/* ข้อความลงทะเบียน */
+.register{
+    text-align: center; /* จัดให้อยู่ตรงกลาง */
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+/* ลิงก์ลงทะเบียน */
+.register a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register a:hover{
+    text-decoration: underline;
+}
+
+/* ปุ่มยกเลิก */
+.cancel-bin{
+    width: 100%;
+    padding: 12px 0;
+    background: rgb(255, 255, 255); /* พื้นหลังสีขาว */
+    border: none;
+    border-radius: 50px; /* ทำให้ปุ่มโค้งมน */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ลิงก์ในปุ่ม */
+button a{
+    text-decoration: none;
+    color: #003399; /* สีข้อความ */
+    display:inline-block;
+}
+
+/* เมื่อโฮเวอร์ที่ปุ่ม Cancel */
+.cancel-bin:hover{
+    background-color:white;
+}

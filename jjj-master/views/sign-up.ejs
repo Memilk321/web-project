@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign-up</title>
+    <link rel="stylesheet" href="/css/sign-up.css">
+</head>
+<body class="background">
+    <div class="blackdrop">
+        <form action="#" class="sign-up-form">
+            <h1 class="sign-up-title">SIGN UP</h1>
+
+            <div class="input-box username-box">
+                <i class="bx bxs-user"></i>
+                <input type="text" class="input username-input" placeholder="Username">
+            </div>
+
+            <div class="input-box email-box">
+                <i class="bx bxs-envelope"></i>
+                <input type="text" class="input email-input" placeholder="Email">
+            </div>
+
+            <div class="input-box password-box">
+                <i class="bx bxs-lock"></i>
+                <input type="password" class="input password-input" placeholder="Password">
+            </div>
+
+            <div class="input-box confirm-password-box">
+                <i class="bx bxs-lock"></i>
+                <input type="password" class="input confirm-password-input" placeholder="Confirm Password">
+            </div>
+
+            <div class="input-box first-name-box">
+                <i class="bx bxs-user"></i>
+                <input type="text" class="input first-name-input" placeholder="First Name">
+            </div>
+
+            <div class="input-box last-name-box">
+                <i class="bx bxs-user"></i>
+                <input type="text" class="input last-name-input" placeholder="Last Name">
+            </div>
+
+            <div class="input-box phone-box">
+                <i class="bx bxs-phone"></i>
+                <input type="text" class="input phone-input" placeholder="Phone Number">
+            </div>
+
+            <div class="button-group">
+                <button class="confirm-button" onclick="signUp()"><a href="#">Confirm</a></button>
+                <button class="cancel-button"><a href="http://localhost:10000/login">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        async function signUp() {
+            const userData = {
+                username: document.querySelector('.username-input').value,
+                email: document.querySelector('.email-input').value,
+                password: document.querySelector('.password-input').value,
+                confirmPassword: document.querySelector('.confirm-password-input').value,
+                first_name: document.querySelector('.first-name-input').value,
+                last_name: document.querySelector('.last-name-input').value,
+                phone: document.querySelector('.phone-input').value
+            };
+    
+            if (userData.password !== userData.confirmPassword) {
+                alert('❌ Password และ Confirm Password ไม่ตรงกัน');
+                return;
+            }
+    
+            try {
+                const res = await fetch('http://localhost:10000/signup', {  
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+    
+                const result = await res.json();
+                if (result.success) {
+                    alert('✅ สมัครสมาชิกสำเร็จ!');
+                    window.location.href = 'http://localhost:10000/login';  // เปลี่ยนเส้นทางไปหน้า login
+                } else {
+                    alert('❌ เกิดข้อผิดพลาด: ' + result.error);
+                    console.error(result.error);
+                }
+            } catch (error) {
+                alert('❌ เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์');
+                console.error('Error:', error);
+            }
+        }
+    </script>
+    
+</body>
+</html>

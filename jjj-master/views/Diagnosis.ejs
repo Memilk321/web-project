@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis and Treatment</title>
+    <link rel="stylesheet" href="/css/Diagnosis and treatment.css"> 
+</head>
+<body>
+    <form action="#" id="diagnosis-form" method="POST">
+        <div class="form-container">
+            <h1 class="form-title">Diagnosis and Treatment Form</h1>
+            
+            <div class="section patient-info">
+                <h3>ข้อมูลผู้ป่วย</h3>
+                <label class="form-label">ชื่อ-นามสกุล: <input type="text" id="patient_name" class="input-text" required></label>
+                <label class="form-label">เลขที่ผู้ป่วย: <input type="text" id="patient_id" class="input-text" required></label>
+                <label class="form-label">วันเดือนปีเกิด: <input type="date" id="birth_date" class="input-date" required></label>
+                <label class="form-label">เพศ:
+                    <input type="radio" name="gender" value="male" class="radio-button"> ชาย
+                    <input type="radio" name="gender" value="female" class="radio-button"> หญิง
+                </label>
+            </div>
+            
+            <div class="section diagnosis-info">
+                <h3>ข้อมูลการวินิจฉัย</h3>
+                <label class="form-label">อาการที่พบ: <textarea id="symptoms" class="textarea"></textarea></label>
+                <label class="form-label">ประวัติการรักษาก่อนหน้า: <textarea id="medical_history" class="textarea"></textarea></label>
+            </div>
+            
+            <div class="section preliminary-check">
+                <h3>ผลตรวจร่างกายเบื้องต้น</h3>
+                <label class="form-label">อุณหภูมิร่างกาย: <input type="text" id="body_temperature" class="input-text"> องศา</label>
+                <label class="form-label">ความดันโลหิต: <input type="text" id="blood_pressure" class="input-text"> mmHg</label>
+                <label class="form-label">อัตราการเต้นของหัวใจ: <input type="text" id="heart_rate" class="input-text"> bpm</label>
+                <label class="form-label">อัตราการหายใจ: <input type="text" id="respiratory_rate" class="input-text"> ครั้ง/นาที</label>
+                <label class="form-label">ค่าออกซิเจนในเลือด (SpO2): <input type="text" id="spo2" class="input-text"> %</label>
+            </div>
+            
+            <div class="section treatment-plan">
+                <h3>แผนการรักษา</h3>
+                <label class="form-label"><input type="checkbox" id="saline" class="checkbox"> การให้น้ำเกลือ</label>
+                <label class="form-label"><input type="checkbox" id="cpr" class="checkbox"> การทำ CPR</label>
+                <label class="form-label">การใช้ยาร่วม/ยาเร่งด่วน (ระบุชื่อยา):</label>
+                <textarea id="emergency_medication" class="textarea"></textarea>
+            </div>
+            
+            <div class="section equipment">
+                <h3>อุปกรณ์ที่ใช้/สั่งจ่าย</h3>
+                <textarea id="equipment" class="textarea"></textarea>
+            </div>
+            
+            <div class="section responsible-person">
+                <h3>ลายเซ็นแพทย์/ผู้รับผิดชอบ</h3>
+                <label class="form-label">ชื่อผู้รับผิดชอบ: <input type="text" id="responsible_person" class="input-text" required></label>
+                <label class="form-label">วันที่: <input type="date" id="record_date" class="input-date" required></label>
+            </div>
+        </div>
+    </form>
+    <button onclick="adddiagnosis();">บันทึก</button>
+    <button><a href="http://localhost:10000/main" class="gg">กลับไปยังหน้าหลัก</a></button>
+
+    <script>
+        async function adddiagnosis() {
+            const diagnosisData = {
+                patient_name: document.getElementById('patient_name').value,
+                patient_id: document.getElementById('patient_id').value,
+                birth_date: document.getElementById('birth_date').value,
+                gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+                symptoms: document.getElementById('symptoms').value,
+                medical_history: document.getElementById('medical_history').value,
+                body_temperature: isNaN(parseFloat(document.getElementById('body_temperature').value)) ? null : parseFloat(document.getElementById('body_temperature').value),
+                blood_pressure: document.getElementById('blood_pressure').value,
+                heart_rate: isNaN(parseInt(document.getElementById('heart_rate').value)) ? null : parseInt(document.getElementById('heart_rate').value),
+                respiratory_rate: isNaN(parseInt(document.getElementById('respiratory_rate').value)) ? null : parseInt(document.getElementById('respiratory_rate').value),
+                spo2: isNaN(parseInt(document.getElementById('spo2').value)) ? null : parseInt(document.getElementById('spo2').value),
+                saline: document.getElementById('saline').checked ? 1 : 0,
+                cpr: document.getElementById('cpr').checked ? 1 : 0,
+                emergency_medication: document.getElementById('emergency_medication').value,
+                equipment: document.getElementById('equipment').value,
+                responsible_person: document.getElementById('responsible_person').value,
+                record_date: document.getElementById('record_date').value
+            };
+
+            try {
+                const res = await fetch('http://localhost:10000/diagnosis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(diagnosisData)
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    alert('บันทึกข้อมูลสำเร็จ!');
+                    window.location.reload();
+                } else {
+                    alert(`'❌ เกิดข้อผิดพลาดในการบันทึกข้อมูล : ${result.error}`);
+                    console.error(result.error);
+                }
+            } catch (error) {
+                alert('❌ เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์');
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
+

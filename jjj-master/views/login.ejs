@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการผู้ป่วยฉุกเฉิน</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="blackbox">
+        <form class="login-from">
+            <h1 class="login-title">LOGIN</h1>
+            <div class="input-box">
+                <i class="bx bxs-user"></i>
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="input-box">
+                <i class="bx bxs-lock-alt"></i>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <div class="remember-forgot-box">
+                <label for="remember"></label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button class="login-bin" onclick="preventDefault">Login</button>
+            <div>
+                <button class="cancel-bin">
+                    <a href="http://localhost:10000/main">Cancel</a>
+                </button>
+            </div>
+            <p class="register">
+                Don't have an account? 
+                <a href="http://localhost:10000/sign-up">Sign up</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Login event
+        document.querySelector('.login-bin').addEventListener('click', async (e) => {
+  e.preventDefault(); // ป้องกันการ submit แบบปกติ
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (!username || !password) {
+    alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    return;
+  }
+
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      alert(result.message);
+      window.location.href = 'http://localhost:10000/main'; 
+    } else {
+      const error = await response.json();
+      alert(error.error);
+    }
+  } catch (error) {
+    console.error('❌ Login Error:', error);
+    alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+  }
+});
+
+
+    </script>
+</body>
+</html>

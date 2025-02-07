@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Referral</title>
+    <link rel="stylesheet" href="/css/referral.css">
+</head>
+<body>
+
+    <h1 class="form-title">Patient Referral Form</h1>
+
+    <form action="#" method="POST" id="referralForm" class="referral-form">
+        
+        <h2 class="section-title">ข้อมูลสถานพยาบาลต้นทาง</h2>
+        <label for="date">วัน/เดือน/ปี ที่ส่งตัว:</label>
+        <input type="date" id="date" name="date" class="input-field" required>
+
+        <label for="userInput">โรงพยาบาล/สถานพยาบาลต้นทาง:</label>
+        <input type="text" id="userInput" name="hospital" class="input-field" required>
+
+        <label for="address">ที่อยู่:</label>
+        <textarea id="address" name="hospital_address" class="textarea-field" required></textarea>
+
+        <label for="telephone">เบอร์ติดต่อ:</label>
+        <input type="text" id="telephone" name="hospital_phone" class="input-field" required>
+  
+        <h2 class="section-title">ข้อมูลผู้ป่วย</h2>
+        <label for="name">ชื่อ-นามสกุล:</label>
+        <input type="text" id="name" name="patient_name" class="input-field" required>
+
+        <label for="Number">เลขประจำตัวผู้ป่วย (ID Number):</label>
+        <input type="text" id="Number" name="patient_id" class="input-field" required>
+
+        <label>เพศ:</label>
+        <input type="radio" name="gender" value="male" class="radio-button" required> ชาย
+        <input type="radio" name="gender" value="female" class="radio-button" required> หญิง
+
+        <label for="age">อายุ:</label>
+        <input type="text" id="age" name="age" class="input-field" required>
+
+        <label for="dob">วันเดือนปีเกิด:</label>
+        <input type="date" id="dob" name="dob" class="input-field" required>
+
+        <label for="Patient_address">ที่อยู่ผู้ป่วย:</label>
+        <textarea id="Patient_address" name="patient_address" class="textarea-field" required></textarea>
+
+        <label for="phone">เบอร์โทรศัพท์:</label>
+        <input type="text" id="phone" name="patient_phone" class="input-field" required>
+
+   
+        <h2 class="section-title">ข้อมูลทางการแพทย์</h2>
+        <label for="Chief">อาการสำคัญที่ส่งต่อ:</label>
+        <textarea id="Chief" name="chief_complaint" class="textarea-field" required></textarea>
+
+        <label for="preliminary">การวินิจฉัยเบื้องต้น:</label>
+        <textarea id="preliminary" name="preliminary_diagnosis" class="textarea-field" required></textarea>
+
+        <label for="Drug_allergy">ประวัติการแพ้ยา:</label>
+        <input type="radio" name="drug" value="no" class="radio-button"> ไม่แพ้ยา
+        <input type="radio" name="drug" value="yes" class="radio-button"> แพ้ยา 
+        <input type="text" id="Drug_allergy" name="drug_allergy" class="input-field">
+
+        <label for="treatment">การรักษาก่อนหน้านี้:</label>
+        <textarea id="treatment" name="previous_treatment" class="textarea-field" required></textarea>
+  
+        <h2 class="section-title">เหตุผลในการส่งต่อ</h2>
+        <input type="radio" name="forward" value="specialist" class="radio-button"> ต้องการแพทย์เฉพาะทาง
+        <input type="radio" name="forward" value="emergency" class="radio-button"> ภาวะฉุกเฉิน
+        <input type="radio" name="forward" value="consultation" class="radio-button"> ขอคำปรึกษา
+        <input type="radio" name="forward" value="other" class="radio-button"> อื่นๆ 
+        <input type="text" name="other_reason" class="input-field">
+
+        <h2 class="section-title">ข้อมูลสถานพยาบาลที่รับส่งต่อ</h2>
+        <label>ชื่อโรงพยาบาลปลายทาง: <input type="text" name="referral_hospital" class="input-field" required></label>
+        <label>แผนกที่ส่งไป: <input type="text" name="referral_department" class="input-field" required></label>
+        <label>เบอร์ติดต่อ: <input type="text" name="referral_phone" class="input-field" required></label>
+
+        <h2 class="section-title">วิธีการส่งต่อ & อุปกรณ์ที่ใช้</h2>
+        <input type="radio" name="transport" value="ambulance" class="radio-button"> รถพยาบาล
+        <input type="radio" name="transport" value="helicopter" class="radio-button"> เฮลิคอปเตอร์
+        <input type="radio" name="transport" value="private" class="radio-button"> รถส่วนตัว
+        
+        <h3 class="sub-title">อุปกรณ์ที่ใช้ระหว่างส่งต่อ:</h3>
+        <input type="radio" name="equipment" value="ventilator" class="radio-button"> เครื่องช่วยหายใจ
+        <input type="radio" name="equipment" value="iv" class="radio-button"> IV Drip
+        <input type="radio" name="equipment" value="defibrillator" class="radio-button"> เครื่องกระตุ้นหัวใจ
+        <input type="radio" name="equipment" value="other" class="radio-button"> อื่นๆ 
+        <input type="text" name="other_equipment" class="input-field">
+
+        <h2 class="section-title">ข้อมูลเพิ่มเติม</h2>
+        <label for="accompanying_personnel">บุคคลที่ติดตามผู้ป่วย:</label>
+        <input type="text" id="accompanying_personnel" name="accompanying_personnel" class="input-field">
+
+        <label for="attached_documents">เอกสารแนบ:</label>
+        <input type="text" id="attached_documents" name="attached_documents" class="input-field">
+
+        <div class="button-group">
+            <button type="button" onclick="addReferral()">บันทึก</button>
+            <button><a href="http://localhost:10000/main" class="button-link">กลับไปหน้าหลัก</a></button>
+        </div>
+
+    </form>
+
+    <script>
+    async function addReferral() {
+        const referralData = {
+            date: document.getElementById('date').value,
+            hospital: document.getElementById('userInput').value,
+            hospital_address: document.getElementById('address').value,
+            hospital_phone: document.getElementById('telephone').value,
+            patient_name: document.getElementById('name').value,
+            patient_id: document.getElementById('Number').value,
+            gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+            age: document.getElementById('age').value,
+            dob: document.getElementById('dob').value,
+            patient_address: document.getElementById('Patient_address').value,
+            patient_phone: document.getElementById('phone').value,
+            chief_complaint: document.getElementById('Chief').value,
+            preliminary_diagnosis: document.getElementById('preliminary').value,
+            drug_allergy: document.getElementById('Drug_allergy').value || document.querySelector('input[name="drug"]:checked')?.value || '',
+            previous_treatment: document.getElementById('treatment').value,
+            referral_reason: document.querySelector('input[name="forward"]:checked')?.value || '',
+            referral_hospital: document.getElementsByName('referral_hospital')[0]?.value || '',
+            referral_department: document.getElementsByName('referral_department')[0]?.value || '',
+            referral_phone: document.getElementsByName('referral_phone')[0]?.value || '',
+            transport_method: document.querySelector('input[name="transport"]:checked')?.value || '',
+            equipment_used: document.querySelector('input[name="equipment"]:checked')?.value || '',
+            accompanying_personnel: document.getElementById('accompanying_personnel')?.value || '',
+            attached_documents: document.getElementById('attached_documents')?.value || ''
+        };
+
+        try {
+            const res = await fetch('http://localhost:10000/referral', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(referralData)
+            });
+
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await res.json();
+            if (result.success) {
+                alert('บันทึกข้อมูลสำเร็จ!');
+                window.location.reload();
+            } else {
+                alert('❌ เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                console.error(result.error);
+            }
+        } catch (error) {
+            alert('❌ เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์');
+            console.error('Error:', error);
+        }
+    }
+    </script>
+
+</body>
+</html>
